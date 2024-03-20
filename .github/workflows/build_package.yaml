@@ -24,7 +24,7 @@ jobs:
           repository: mhpob/demo-data
           ref: ${{ github.event.client_payload.sha }}
           token: ${{ secrets.API_KEY }}
-          path: '../demo-data'
+          path: 'demo-data'
 
       - name: List files in demo-data
         run: |
@@ -35,4 +35,9 @@ jobs:
         run: |
           cd ../demo-data-r-package
           ls
+
+      - name: See differences?
+        run: |
+          cd "${{ github.workspace }}"
+          git status
           
