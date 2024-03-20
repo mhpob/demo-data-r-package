@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout target repo
         uses: actions/checkout@v4
-        with:
-          path: 'demo-data-r-package'
 
       - name: Checkout trigger repo
         uses: actions/checkout@v4
@@ -26,7 +24,7 @@ jobs:
           repository: mhpob/demo-data
           ref: ${{ github.event.client_payload.sha }}
           token: ${{ secrets.API_KEY }}
-          path: 'demo-data'
+          path: '../demo-data'
 
       - name: List files in demo-data
         run: |
