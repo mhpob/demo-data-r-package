@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - names: Checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v4
         with:
-        ref: ${{ github.event.client_payload.sha }}
+          ref: ${{ github.event.client_payload.sha }}
 
       - name: List files
         run: |
