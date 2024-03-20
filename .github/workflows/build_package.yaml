@@ -26,7 +26,6 @@ jobs:
         with:
           repository: mhpob/demo-data
           ref: ${{ github.event.client_payload.sha }}
-          token: ${{ secrets.API_KEY }}
           path: 'demo-data'
 
       - name: List files in r-package
