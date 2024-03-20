@@ -1,0 +1,25 @@
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#repository_dispatch
+# https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-dispatch-event
+# https://docs.github.com/en/webhooks/webhook-events-and-payloads#repository_dispatch
+
+# https://medium.com/hostspaceng/triggering-workflows-in-another-repository-with-github-actions-4f581f8e0ceb
+
+name: R Package Build from Trigger
+
+on: 
+  repository_dispatch:
+    types: [build-r-package]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - names: Checkout repo
+        uses: actions/checkout@v4
+        with:
+        ref: ${{ github.event.client_payload.sha }}
+
+      - name: List files
+        run: |
+          find ~+/raw -type f | grep -v "yaml"
