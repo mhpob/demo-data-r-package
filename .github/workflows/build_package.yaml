@@ -26,15 +26,14 @@ jobs:
           token: ${{ secrets.API_KEY }}
           path: 'demo-data'
 
-      - name: List files in demo-data
+      - name: List files in r-package
+        run: "ls"
+          
+      - name: Copy files from demo-data
         run: |
           cd demo-data
-          find ~+/raw -type f | grep -v "yaml"
-
-      - name: List files in r-package
-        run: |
-          cd ../demo-data-r-package
-          ls
+          cp -u "$(find ~+/raw -type f | grep -v "yaml")" ..
+          ls ..
 
       - name: See differences?
         run: |
