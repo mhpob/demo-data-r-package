@@ -32,11 +32,14 @@ jobs:
       - name: Copy files from demo-data
         run: |
           cd demo-data
-          cp -u "$(find ~+/raw -type f | grep -v "yaml")" ..
+          cp -u "$(find ~+/raw -type f | grep -v "yaml")" ../inst/exdata
           ls ..
-
-      - name: See differences?
+          
+      - name: Commit built R package
         run: |
-          cd "${{ github.workspace }}"
-          git status
+          git config --local user.name actions-user
+          git config --global user.email 'actions@github.com'
+          git add . ':!demo-data'
+          git commit -am "[auto] Build R Package" || echo "No changes to commit"
+          git push origin main
           
