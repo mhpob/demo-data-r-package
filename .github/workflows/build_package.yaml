@@ -15,11 +15,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout target repo
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.client_payload.sha }}
+          path: 'demo-data-r-package'
 
-      - name: List files
+      - name: Checkout trigger repo
+        uses: actions/checkout@v4
+        with:
+          repository: mhpob/demo-data
+          ref: ${{ github.event.client_payload.sha }}
+          token: ${{ secrets.API_KEY }}
+          path: 'demo-data'
+
+      - name: List files in demo-data
         run: |
+          cd demo-data
           find ~+/raw -type f | grep -v "yaml"
+
+      - name: List files in r-package
+        run: |
+          cd ../demo-data-r-package
+          ls
+          
