@@ -34,7 +34,7 @@ jobs:
       - name: Copy files from demo-data
         run: |
           cd demo-data
-          cp -u "$(find ~+/raw -type f | grep -v "yaml")" ../inst/extdata
+          find ~+/raw -type f ! -name '*.yaml' -exec cp -u '{}' ../inst/extdata
           ls ..
           
       - name: Commit built R package
